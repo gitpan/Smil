@@ -1,3 +1,13 @@
+0.72
+
+Added method which forces the Smil module to output proper code based on the version 
+of the player.  Right now only RealPlayer is supported.  If you call the method:
+setBackwardsCompatible( player => "rp", version => 6 ) then the module will 
+create code which can execute on any RealPlayer of version 6 and above, for example.
+This is useful when using the "inline" attribute for adding media.  Inlining base64
+encodes a piece of media directly into the SMIL file, but was not available as a 
+feature of the RealPlayer until version 7.
+
 0.701
 
 Named the module more appropriately for CPAN upload, which requires a new version number.

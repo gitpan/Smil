@@ -45,6 +45,7 @@ if( open INPUTFILE, $input ) {
 			# Make into key value pairs
 			print "Creating SMIL\n" if $debug;
 			$s = new Smil( &getAttributes( $1 ) );			
+			$s->setBackwardsCompatible( "player" => "rp", "version" => 6 );
 		}
 		elsif( /\s*<region([^\/]*)\// ) {
 			if( $s ) {

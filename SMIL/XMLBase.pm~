@@ -52,16 +52,17 @@ sub setPrivate {
    my $value = shift;
 
    if( $key and $value ) {
-							$self->{_private} = {} if !$self->{_private};
-							$self->{_private}->{ $key } = $value;
-			}
+
+	$self->{_private} = {} if !$self->{_private};
+	${self->{_private}}{ $key } = $value;
+   }
 }
 
 sub getPrivate {
-				my $self = shift;
-				my $key = shift;
-				
-				return( $self->{_private}->{ $key } ); # if $self->{_private};
+   my $self = shift;
+   my $key = shift;
+
+   return ${self->{_private}}{ $key } if $self->{_private};
 }
 
 sub setTag {
@@ -71,9 +72,9 @@ sub setTag {
 }
 
 sub setFavorite {
-				my $self = shift;
-				my $favorite = shift;
-				$self->{_favorite} = $favorite;
+	my $self = shift;
+	my $favorite = shift;
+	$self->{_favorite} = $favorite;
 }
 
 sub getTag {

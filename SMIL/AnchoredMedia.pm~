@@ -23,15 +23,15 @@ sub init {
     my $anchors = $hash{ $anchors };
     
     croak "Creating anchor tag without any anchors, REALLY BAD!\n" 
-								unless $anchors;
+	unless $anchors;
     
     foreach $anchor ( @$anchors ) {
-								$anch = new SMIL::Anchor( $anchor );
-								$self->setTagContents( $self->{$anchors_index}++ => $anch );
-				}
+	$anch = new SMIL::Anchor( $anchor );
+	$self->setTagContents( $self->{$anchors_index}++ => $anch );
+    }
     
     my %attrs = $self->createValidAttributes( { %hash },
-																																														[ @mediaAttributes ] );
+					     [@mediaAttributes] );
     
     $self->setAttributes( %attrs );
 }

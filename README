@@ -19,7 +19,7 @@ make install
 If you have the correct privileges, perl will place it in the right spot.
 
 If you are not administrator, or have insufficient privileges to install
-into the perl lib path, then you will have to modify your %INC variable 
+into the perl lib path, then you will have to modify your @INC variable 
 using this command (substitute the directory where Smil.pm is for 
 the fake directory /install/path/)
 
@@ -41,7 +41,7 @@ perl distribution.  If it doesn't, please email me and tell me your problem.
 
 WHERE IS THE DOCUMENTATION?
 
-Run 'perldoc Smil'  If you haven't installed it correctly, you will 
+Run 'perldoc Smil'  If you haven't installed it as superuser, you will 
 have to perpend the installation directory to the front of the module
 name.
 

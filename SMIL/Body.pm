@@ -1,6 +1,6 @@
 package SMIL::Body;
 
-$VERSION = "0.701";
+$VERSION = "0.72";
 
 use SMIL::XMLContainer;
 use SMIL::Par;
@@ -140,8 +140,16 @@ sub addSwitchedMedia {
     # Extract the switch attribute
     my $switch_attribute = $hash{ $switch };
     my $media = $hash{ $medias };
-    
+ 
+    $self->initTimeline( new SMIL::Par ) 
+								unless( $self->{$timelineStack} && @{$self->{$timelineStack}} );
+    croak "Need to call startParallel or startSequence before adding media\n" 
+								if !$check_errors && !@{$self->{$timelineStack}};
+				
     my $switch_obj = new SMIL::Switch( $switch_attribute, $media );
     my $timeline_head = ${$self->{$timelineStack}}[ -1 ];
     $timeline_head->setTagContents( $self->{$counter}++ => $switch_obj );
+
 }
+
+

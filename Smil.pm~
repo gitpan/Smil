@@ -45,33 +45,27 @@ my $RN_NS_URL = "http://features.real.com/systemComponent";
 
 my %earliestAttribute = ( 'inline' => 7 );
 
-my @RP_VERSION_MAPPING = ( "",  		# 0
-																													"", 		# 1, unsupported
-																													"", 		# 2, unsupported
-																													"", 		# 3, unsupported
-																													"", 		# 4, unsupported
-																													"", 		# 5, unsupported
-																													"", 		# 6, no switch allowed
-																													
-																													# 7, Gold Player 7
-																													"http://features.real.com/?feature;player=6.0.7.380", 		
-																													
-																													# 8, Gold Player 8
-																													"http://features.real.com/?feature;player=6.0.9.450",
-																													);
+my @RP_VERSION_COMPONENT = ( "",  		# 0
+				"", 		# 1, unsupported
+				"", 		# 2, unsupported
+				"", 		# 3, unsupported
+				"", 		# 4, unsupported
+				"", 		# 5, unsupported
+				"", 		# 6, no switch allowed
 
-my %VERSION_MAPPING = ( $RP_COMPATIBLE => \@RP_VERSION_MAPPING );
+				# 7, Gold Player 7
+				"http://features.real.com/?feature;player=6.0.7.380", 		
 
-my %RP_FEATURE_VERSION_MAPPING = ( 'inline' => 7, 'newwindow' => 7 );
-
-my %FEATURE_VERSION_MAPPING = ( $RP_COMPATIBLE => \%RP_FEATURE_VERSION_MAPPING );
+				# 8, Gold Player 8
+				"http://features.real.com/?feature;player=6.0.9.450",
+				);
 
 my @smilAttributes = ( $RN_NS,
-																							$QT_AUTOPLAY,
-																							$QT_CHAPTER_MODE,
-																							$QT_IMMEDIATE_INSTANTIATION,
-																							$QT_NEXT,
-																							$QT_TIME_SLIDER );
+$QT_AUTOPLAY,
+$QT_CHAPTER_MODE,
+$QT_IMMEDIATE_INSTANTIATION,
+$QT_NEXT,
+$QT_TIME_SLIDER );
 
 sub init {
     my $self = shift;
@@ -242,15 +236,14 @@ sub addMedia {
     }
 }
 
-sub getEarliestSupportedVersion {
+sub getMaximumSupportedVersion {
 
    my $type = shift;
-			my $feature = shift;
 
    print STDERR "Only RealPlayer is supported as backwards compatible type so far.: $type\n" 
 							unless $type eq $RP_COMPATIBLE;
-
-   return( $FEATURE_VERSION_MAPPING{ $type }->{ $feature } );  # $RP_VERSION_COMPONENT );
+			
+   return( $#RP_VERSION_COMPONENT );
 
 }
 
@@ -262,7 +255,8 @@ sub getSupportedVersionAttribute {
    print STDERR "Only RealPlayer supported as backwards compatible type so far.: $player\n" 
 							unless $player eq $RP_COMPATIBLE;
 			
-   return( $CV_SYSTEM_COMPONENT, $VERSION_MAPPING{ $player }->[ $version ] );
+   return( $CV_SYSTEM_COMPONENT, $RP_VERSION_COMPONENT[ $version ] )
+							if $RP_VERSION_COMPONENT[ $version ];
 			
 }
 
@@ -275,8 +269,8 @@ sub addBackwardsCompatibleSwitch {
 				
     my $self = shift;
 				
-				# Check for this 'feature' when adding switch code
-				my $feature = shift;
+				# Check for this attribute when checking versions.
+				my $attribute = shift;
     my @medias = ();
 				
     my $earliestVersion = &getEarliestVersionForAttribute( $attribute ); 
@@ -294,19 +288,22 @@ sub addBackwardsCompatibleSwitch {
     # Create a different media object for each of the versions
     # to support.  Make sure to go backwards since switch uses first
     # match
-				my $supportedIndex = &getEarliestSupportedVersion( $playerType, $feature );
-
-				my @attributes = ( %withSwitchingAttribute, 
-																							( @RP_SYSTEM_REQUIRED_ATTRIBUTE, 
-																									&getSupportedVersionAttribute( $supportedIndex, 	
-																																																								$self->getPrivate( $PLAYER_COMPATIBLE ) ) ) );
-				# attributes, and push it on the stack
-				push @medias, SMIL::MediaFactory::getMediaObject( @attributes );
+    for( my $supportedIndex = &getMaximumSupportedVersion( $playerType );
+									$supportedIndex >= $earliestVersion; $supportedIndex-- ) {
+								# Create a new media reference for each one with the proper switch
+								my @attributes = ( %withSwitchingAttribute, 
+																											( @RP_SYSTEM_REQUIRED_ATTRIBUTE, 
+																													&getSupportedVersionAttribute( $supportedIndex, 	
+																																																												$self->getPrivate( $PLAYER_COMPATIBLE ) ) ) );
+								# attributes, and push it on the stack
+								push @medias, SMIL::MediaFactory::getMediaObject( @attributes );
+				}
 				
 				# Now, add the one without the attribute
 				push @medias, SMIL::MediaFactory::getMediaObject( %withoutSwitchingAttribute );
 				
 				# Create the different medias 
+				print "Calling the switch...\n";
 				$self->addSwitchedMedia( 'switch' => 'system-required',
 																													medias => [ \@medias ] );
 }
