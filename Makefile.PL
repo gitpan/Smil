@@ -3,7 +3,8 @@
 use ExtUtils::MakeMaker;
 
 WriteMakefile( NAME => "Smil",
-	       PMLIBDIRS => [ ( ".", "SMIL", "RN" ) ] );
+#	       PMLIBDIRS => [ ( ".", "SMIL", "RN" ) ] 
+		);
 
 package MY;
 

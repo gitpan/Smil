@@ -1,3 +1,7 @@
+0.862
+
+Added repeatCount as well.
+
 0.861
 
 Allowing sequence and parallel tags to have the "repeat" attribute.

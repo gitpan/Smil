@@ -1,5 +1,5 @@
 package SMIL::Transition;
-$VERSION = "0.861";
+$VERSION = "0.891";
 use SMIL::XMLTag;
 @ISA = qw( SMIL::XMLTag );
 

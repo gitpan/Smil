@@ -1,6 +1,6 @@
 package SMIL::MediaResolver;
 
-$VERSION = "0.861";
+$VERSION = "0.891";
 
 my %typeLookupHash = (
 		      'smil' => 'application/smil',

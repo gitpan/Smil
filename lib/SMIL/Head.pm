@@ -2,7 +2,7 @@ package SMIL::Head;
 
 my $debug = 0;
 
-$VERSION = "0.861";
+$VERSION = "0.891";
 
 use SMIL::XMLContainer;
 use SMIL::XMLTag;
@@ -23,7 +23,7 @@ sub init {
     $self->SUPER::init( "head" );    
     if( $hash{ 'height' } && $hash{ 'width' } ) {
 	$self->initLayout( @_ ) ;
-	print "Setting layout" if $debug;
+	# print "Setting layout" if $debug;
     }
     $self->initMetas( @_ ) if( $hash{ 'meta' } );
 }
@@ -44,6 +44,40 @@ sub initLayout {
     my $self = shift;
     $self->{$layout} = new SMIL::Layout( @_ );
     $self->setTagContents( $layout => $self->{$layout} );
+}
+
+sub getRegionAttribute
+{
+    my $self = shift;
+    my $region_name = shift;
+    my $attr = shift;
+    my $return_value;
+    my $ly;
+    my $found_region;
+    if( $self ) {
+	if( $ly = $self->getContentObjectByName( $layout ) ) {
+	    
+	    if( $found_region = $ly->getRegion( $region_name ) ) {
+		if( $found_region ) {
+		    # extract the attribute value, send it back
+		    $return_value = $found_region->getAttributeValue( $attr );
+		}
+		else {
+		    #print "No region found.\n";
+		}
+	    }
+	    else {
+		#print "No found region?";
+	    }
+	}
+	else {
+	    #print "No layout?";
+	}
+    }
+    else {
+	#print "No object.\n";
+    }
+    return $return_value;
 }
 
 sub initMetas {
@@ -77,22 +111,22 @@ sub setMeta {
 }
 
 sub addTransition {
-				my $self = shift;
-				my $transitions_ref = $self->getContentObjectByName( $transitions );
-				if( !( $transitions_ref && @$transitions_ref ) ) {
-								$transitions_ref = [];
-				}
-
-				my $transition = new SMIL::Transition( @_ );
-				push @$transitions_ref, $transition;
+    my $self = shift;
+    my $transitions_ref = $self->getContentObjectByName( $transitions );
+    if( !( $transitions_ref && @$transitions_ref ) ) {
+	$transitions_ref = [];
+    }
+    
+    my $transition = new SMIL::Transition( @_ );
+    push @$transitions_ref, $transition;
 #				$self->{ $transitions } = $transitions_ref;
-				$self->setTagContents( $transitions => $transitions_ref );
+    $self->setTagContents( $transitions => $transitions_ref );
 }
 
 sub addRegion {
     my $self = shift;
     $self->{$layout} = new SMIL::Layout( @_ )
-								unless $self->getContentObjectByName( $layout );
+	unless $self->getContentObjectByName( $layout );
     $self->getContentObjectByName( $layout )->addRegion( @_ );
 }
 

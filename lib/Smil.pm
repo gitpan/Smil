@@ -1,6 +1,6 @@
 package Smil;
 
-$VERSION = "0.861";
+$VERSION = "0.891";
 
 use Carp;
 use SMIL::XMLBase;
@@ -451,6 +451,23 @@ sub addComment {
     my $self = shift;
     my $comment = shift;
     $self->getContentObjectByName( $body )->addCode( "<!--$comment-->" );
+}
+
+sub getRegionAttributeByName
+{
+    my $self = shift;
+    my $region_name = shift;
+    my $attr = shift;
+    my $the_head = $self->getContentObjectByName( $head );
+    my $return_value;
+    if( $the_head ) {
+	$return_value = $the_head->getRegionAttribute( $region_name, $attr );
+    }
+    if( 'ZERO_STRING' eq $return_value )
+    {
+	$return_value = "0";
+    }
+    return $return_value;
 }
 
 sub addSwitchedMedia {

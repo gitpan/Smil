@@ -1,6 +1,6 @@
 package SMIL::Body;
 
-$VERSION = "0.861";
+$VERSION = "0.891";
 
 use SMIL::XMLContainer;
 use SMIL::Par;
