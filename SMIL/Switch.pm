@@ -1,6 +1,6 @@
 package SMIL::Switch;
 
-$VERSION = "0.7";
+$VERSION = "0.701";
 
 use SMIL::MediaFactory;
 @ISA = qw( SMIL::XMLContainer );

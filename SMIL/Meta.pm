@@ -1,6 +1,6 @@
 package SMIL::Meta;
 
-$VERSION = "0.7";
+$VERSION = "0.701";
 
 use SMIL::XMLTag;
 

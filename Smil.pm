@@ -1,6 +1,6 @@
 package Smil;
 
-$VERSION = "0.70";
+$VERSION = "0.701";
 
 use Carp;
 use SMIL::XMLBase;

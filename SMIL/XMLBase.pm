@@ -1,6 +1,6 @@
 package SMIL::XMLBase;
 
-$VERSION = "0.7";
+$VERSION = "0.701";
 
 $ZERO_STRING = "ZERO_STRING";
 $TRUE = 'true';

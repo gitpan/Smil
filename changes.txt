@@ -1,15 +1,19 @@
+0.701
+
+Named the module more appropriately for CPAN upload, which requires a new version number.
+
 0.7 
 
 Added the "inline" attribute to media tags.  When you add a media file now
 using the addMedia method, if you specify "inline" => 1 (or any true value)
-the module will attempt to download and inline the code according to spec
+the module will attempt to download and inline the media according to spec
 http://www.ietf.org/rfc/rfc2397.  Thanks to Robla at RealNetworks for the
 speedy answer to this.
 
 Added quicktime extension code xmlns to the smil tag element.  Now, just specify
 any of the methods listed in the qt.pl to have the module automatically add the 
-quicktime namespace into the smil element.  I am including a small qt.pl file which demonstrates
-the usage of this, with a few QuickTime tags included.
+quicktime namespace into the smil element.  I am including a small qt.pl file 
+which demonstrates the usage of this, with a few QuickTime tags included.
 
 Also, you no longer call 'use SYMM::Smil;' or 'new SYMM::Smil;'.  
 Just 'use Smil;' now.  Also changed the webpage links and email address. 

@@ -1,6 +1,6 @@
 package SMIL::Code;
 
-$VERSION = "0.7";
+$VERSION = "0.701";
 
 sub getAsString {
 	my $self = shift;
