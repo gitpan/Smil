@@ -1,6 +1,6 @@
 package SMIL::SystemSwitches;
 
-$VERSION = "0.85";
+$VERSION = "0.86";
 
 require Exporter;
 @ISA = qw( Exporter );

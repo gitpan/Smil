@@ -14,6 +14,6 @@ my $s = new Smil;
 $s->addInlinedMedia( src => $smil2 );
 $s->addInlinedMedia( src => $rt );
 $s->addMedia( src => "bar.gif", 
-														href => "http://www.real.com/", transition => "foo" );
+														href => "http://www.webiphany.com/", transition => "foo" );
 $s->addTransition( id => "foo", type => "starWipe", horzRepeat => '3' );
 print $s->getAsString . "\n";

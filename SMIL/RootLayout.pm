@@ -1,6 +1,6 @@
 package SMIL::RootLayout;
 
-$VERSION = "0.85";
+$VERSION = "0.86";
 
 use SMIL::XMLTag;
 
