@@ -2,7 +2,7 @@ package SMIL::Head;
 
 my $debug = 0;
 
-$VERSION = "0.86";
+$VERSION = "0.861";
 
 use SMIL::XMLContainer;
 use SMIL::XMLTag;

@@ -1,6 +1,6 @@
 package SMIL::MediaFactory;
 
-$VERSION = "0.86";
+$VERSION = "0.861";
 
 require Exporter;
 @ISA = qw( Exporter );

@@ -2,7 +2,7 @@ package SMIL::MediaAttributes;
 
 use SMIL::SystemSwitches;
 
-$VERSION = "0.86";
+$VERSION = "0.861";
 
 require Exporter;
 @ISA = qw( Exporter );

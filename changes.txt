@@ -1,3 +1,7 @@
+0.861
+
+Allowing sequence and parallel tags to have the "repeat" attribute.
+
 0.85 
 
 Finished off the documentation of all exposed methods.  Added

@@ -1,6 +1,6 @@
 package SMIL::Region;
 
-$VERSION = "0.86";
+$VERSION = "0.861";
 
 @ISA = qw( SMIL::XMLTag );
 

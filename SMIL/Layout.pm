@@ -2,7 +2,7 @@ package SMIL::Layout;
 
 my $debug = 1;
 
-$VERSION = "0.86";
+$VERSION = "0.861";
 
 use SMIL::XMLContainer;
 use SMIL::RootLayout;

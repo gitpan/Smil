@@ -1,6 +1,6 @@
 package Smil;
 
-$VERSION = "0.86";
+$VERSION = "0.861";
 
 use Carp;
 use SMIL::XMLBase;
@@ -748,7 +748,7 @@ replace the current SMIL file with the new link.
 
 As a new feature of 0.7, you can now inline your media files directly within 
 a SMIL file.  When you add media to smil using the addMedia method call, 
-specify --inline => 1 and the module will attempt to download or read from
+specify inline => 1 and the module will attempt to download or read from
 local disk any files which are added using this attribute.  Check out the 
 inline.pl file inside the installation directory, and also the slurp.pl 
 script which will slurp in simple SMIL files and inline all code if you give

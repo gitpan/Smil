@@ -1,6 +1,6 @@
 package SMIL::XMLTag;
 
-$VERSION = "0.86";
+$VERSION = "0.861";
 
 use SMIL::XMLBase;
 

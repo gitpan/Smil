@@ -15,7 +15,7 @@ my $output = $args{ '--output' };
 my $inline = 1 if $args{ '--inline' };
 
 die "Must specify --input <existing_filename> and --output <filename> for the script (and --inline to inline all media)."
-unless -e $input and $output;
+unless $input and -e $input and $output;
 
 my $s = "";
 
