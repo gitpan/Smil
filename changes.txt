@@ -1,3 +1,15 @@
+0.898
+
+Fixed permissions errors.  Downgraded back to MakeMaker.  :)
+
+0.892
+
+Upgraded to Module::Build
+
+0.891
+
+Fixed Makefile.PL issues.  Doh.
+
 0.862
 
 Added repeatCount as well.

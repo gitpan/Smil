@@ -1,5 +1,7 @@
 package RN::RealText;
 
+$VERSION = "0.898";
+
 sub new {
 				my $proto = shift;
 				my $class = ref( $proto ) || $proto;

@@ -1,6 +1,6 @@
 package SMIL::AnchoredMedia;
 
-$VERSION = "0.891";
+$VERSION = "0.898";
 
 use SMIL::MediaAttributes;
 use SMIL::Anchor;

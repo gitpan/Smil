@@ -1,6 +1,6 @@
 package SMIL::Href;
 
-$VERSION = "0.891";
+$VERSION = "0.898";
 
 use SMIL::UnanchoredMedia;
 use SMIL::SystemSwitches;

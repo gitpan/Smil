@@ -6,5 +6,6 @@ require Exporter;
 		$CHAPTER_ALL
 		);
 
+$VERSION = "0.898";
 $CHAPTER_CLIP = 'clip';
 $CHAPTER_ALL = 'all';

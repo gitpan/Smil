@@ -1,6 +1,6 @@
 package SMIL::Seq;
 
-$VERSION = "0.891";
+$VERSION = "0.898";
 
 use SMIL::TimelineBase;
 use SMIL::XMLContainer;

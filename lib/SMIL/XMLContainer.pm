@@ -1,6 +1,6 @@
 package SMIL::XMLContainer;
 
-$VERSION = "0.891";
+$VERSION = "0.898";
 
 use SMIL::XMLBase;
 
