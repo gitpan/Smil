@@ -1,6 +1,6 @@
 package SMIL::Par;
 
-$VERSION = "0.72";
+$VERSION = "0.85";
 
 use Carp;
 use SMIL::TimelineBase;

@@ -1,6 +1,6 @@
 package SMIL::AnchoredMedia;
 
-$VERSION = "0.72";
+$VERSION = "0.85";
 
 use SMIL::MediaAttributes;
 use SMIL::Anchor;
@@ -16,7 +16,9 @@ sub init {
     my $self = shift;
     my %hash = @_;
     
-    my $type = $hash{ $media_type } if $hash{ $media_type } !~ /.\/./;
+    my $type = "";
+				$type = $hash{ $media_type } if 
+								( $hash{ $media_type } and $hash{ $media_type } !~ /.\/./ );
     $self->SUPER::init( $type ? $type : "ref" );
     
     # Process the anchors here

@@ -1,3 +1,26 @@
+0.85 
+
+Finished off the documentation of all exposed methods.  Added
+RN::RealText module which allows you to create simple RealText
+files using Perl.  More importantly, you can inline these RT
+files right into SMIL, without ever writing them to disk.  Check out
+smil2.pl for details.  In fact, you can inline any object 
+which supports the getAsString and getMimeType method interface.
+
+0.8
+
+Added some code for preliminary support of SMIL 2.0.  For example, you 
+can now specify transitions when adding your media, and you can 
+add transition effects using the addTransition method.  Peruse the
+documentation for more information.  I also added support for inlining
+dynamically generated media types.  For example, you can create a RealText
+file inside your perl script, and then inline that in the SMIL
+without writing the RealText to disk at all.  You can also inline 
+SMIL files, which is something that RealOne should support, since it
+supports referencing SMIL files.  Other general code cleanups as well.
+Also, improving the documentation as best I can, but this might
+have to wait until the next version.
+
 0.72
 
 Added method which forces the Smil module to output proper code based on the version 

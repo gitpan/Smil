@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/perl -w
 
 use lib '.';
 use Smil;
@@ -54,22 +54,27 @@ if( open INPUTFILE, $input ) {
 			} else { print "Nope\n"; }
 		}
 		elsif( /\s*<par/ ) {
+						$s = new Smil if( !$s );
 			$s->startParallel;
 			print "Starting parallel" if $debug;
 		}
 		elsif( /\s*<\/par/ ) {
+						$s = new Smil if( !$s );
 			$s->endParallel;
 			print "Ending parallel\n" if $debug;
 		}
 		elsif( /\s*<seq/ ) {
+						$s = new Smil if( !$s );
 			$s->startSequence;
 			print "Starting sequence\n" if $debug;
 		}
 		elsif( /\s*<\/seq/ ) {
+						$s = new Smil if( !$s );
 			$s->endSequence;
 			print "Ending sequence\n" if $debug;
 		}
 		elsif( /\s*<[$media_types]([^>]*)/ ) {
+						$s = new Smil if( !$s );
 			$s->addMedia( &getAttributes( $1 ), ( $inline ? ( "inline" => 1 ) : () ) );
 			print "Adding media\n" if $debug;
 		}

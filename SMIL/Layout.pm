@@ -2,7 +2,7 @@ package SMIL::Layout;
 
 my $debug = 1;
 
-$VERSION = "0.72";
+$VERSION = "0.85";
 
 use SMIL::XMLContainer;
 use SMIL::RootLayout;
@@ -121,55 +121,55 @@ sub addRegion {
     my %hash = @_;
 
     # Now, set up the new SMIL::region
-
+				
     # If they used "name" instead of "id" fix that
     $hash{ $id } = $hash{ $name } if $hash{ $name };
-
+				
     # If they specified the src inside the region, then
     # figure out the dimensions from the src file
     if( $hash{ $module_defined_src } ) {
-	my $ref = $hash{ $module_defined_src };
-	my $content;
-	my $type;
-
-	# If a http ref, if we have LWP installed use it to
-	# get the image and determine the dimensions
-	if( $ref =~ /^http/ ) {
-	    eval 'use LWP::Simple;';
-	    my $lwp_installed = !$@;
-	    
-	    if( $lwp_installed ) {
-		$content = LWP::Simple::get $ref;
-		
-		# Also, get the type if possible
-		$type = head( $ref );
-	    }
-	    else {
-		die "LWP not installed.\nYou may not use http sources" .
-		    " in your region definitions.\nSmil.pm cannot " .
-			"connect and determine file size without LWP\n";
-	    }
-	}
-	else {
-	    # Ok, hope it is local to the script.
-	    if( open FILE, $ref ) {
-		binmode FILE;
-		undef $/;
-		$content = <FILE>;
-		close FILE;
-	    }
-	    else {
-		die "Couldn't find the file $ref.\n" .
-	    "Make sure that $ref is relative to the script.\n" .
-	    "Using src to define a region does not set the\n".
-	    "src for the SMIL file but is used to determine\n" .
-	    "file size.\n";
-	    }
-
-	    # Determine the type from the extension
-	    $type = "\L$1" if $ref =~ /\.(\w*)$/;
-	}
-	
+								my $ref = $hash{ $module_defined_src };
+								my $content;
+								my $type;
+								
+								# If a http ref, if we have LWP installed use it to
+								# get the image and determine the dimensions
+								if( $ref =~ /^http/ ) {
+												eval 'use LWP::Simple;';
+												my $lwp_installed = !$@;
+												
+												if( $lwp_installed ) {
+																$content = LWP::Simple::get $ref;
+																
+																# Also, get the type if possible
+																$type = head( $ref );
+												}
+												else {
+																die "LWP not installed.\nYou may not use http sources" .
+																				" in your region definitions.\nSmil.pm cannot " .
+																								"connect and determine file size without LWP\n";
+												}
+								}
+								else {
+												# Ok, hope it is local to the script.
+												if( open FILE, $ref ) {
+																binmode FILE;
+																undef $/;
+																$content = <FILE>;
+																close FILE;
+												}
+												else {
+																die "Couldn't find the file $ref.\n" .
+																				"Make sure that $ref is relative to the script.\n" .
+																								"Using src to define a region does not set the\n".
+																												"src for the SMIL file but is used to " .
+																																"determine\nfile size.\n";
+												}
+												
+												# Determine the type from the extension
+												$type = "\L$1" if $ref =~ /\.(\w*)$/;
+								}
+								
 	if( $content ) {
 	    # Figure out what the size is 
 	    ( $height, $width ) = process_for_size( $type, $content );
@@ -185,37 +185,37 @@ sub addRegion {
     # Now, if we have some formatting in the "sm-align" attribute
     # figure out the top or left.
     if( $hash{ $module_defined_align } ) {
-	# Get the root layout object
-	my $ht = $self->getRootHeight();
-	my $wh = $self->getRootWidth();
-
-	# Calculate the top and left unless they are set already
-	die "Need height to calculate alignment." 
-	    unless defined( $hash{ height } );
-	if( !defined( $hash{ top } ) ) {
-	    # Figure out where to put this item
-	    # Get the total size / 2 minus the item size / 2
-	    $hash{ top } = int( ( $ht / 2 ) - ( $hash{ height } / 2 ) );
-	}
-	
-	die "Need width to calculate alignment. " 
-	    unless defined( $hash{ width } );
-	if( !defined( $hash{ left } ) ) {
-	    # Get the total size / 2 minus the item size / 2
-	    $hash{ left } = int( ( $wh / 2 ) - ( $hash{ width } / 2 ) );
-	}
-
-	if( defined( $hash{ left } ) && defined( $hash{ $left_offset } ) ) {
-		$hash{ left } += $hash{ $left_offset };
-	}
-
-	if( defined( $hash{ top } ) && defined( $hash{ $top_offset } ) ) {
-		$hash{ top } += $hash{ $top_offset };
-	}
+								# Get the root layout object
+								my $ht = $self->getRootHeight();
+								my $wh = $self->getRootWidth();
+								
+								# Calculate the top and left unless they are set already
+								die "Need height to calculate alignment." 
+												unless defined( $hash{ height } );
+								if( !defined( $hash{ top } ) ) {
+												# Figure out where to put this item
+												# Get the total size / 2 minus the item size / 2
+												$hash{ top } = int( ( $ht / 2 ) - ( $hash{ height } / 2 ) );
+								}
+								
+								die "Need width to calculate alignment. " 
+												unless defined( $hash{ width } );
+								if( !defined( $hash{ left } ) ) {
+												# Get the total size / 2 minus the item size / 2
+												$hash{ left } = int( ( $wh / 2 ) - ( $hash{ width } / 2 ) );
+								}
+								
+								if( defined( $hash{ left } ) && defined( $hash{ $left_offset } ) ) {
+												$hash{ left } += $hash{ $left_offset };
+								}
+								
+								if( defined( $hash{ top } ) && defined( $hash{ $top_offset } ) ) {
+												$hash{ top } += $hash{ $top_offset };
+								}
     }
-
+				
     my %attrs = $self->createValidAttributes( { %hash },  
-					     [@regionAttributes] );
+																																														[@regionAttributes] );
     $ZERO_STRING = "ZERO_STRING";
     my $region = new SMIL::Region;
     $region->setAttributes( %attrs );

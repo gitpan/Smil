@@ -1,6 +1,6 @@
 package SMIL::Anchor;
 
-$VERSION = "0.72";
+$VERSION = "0.85";
 
 use SMIL::XMLTag;
 

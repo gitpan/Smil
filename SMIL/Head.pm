@@ -2,17 +2,19 @@ package SMIL::Head;
 
 my $debug = 0;
 
-$VERSION = "0.72";
+$VERSION = "0.85";
 
 use SMIL::XMLContainer;
 use SMIL::XMLTag;
 use SMIL::Layout;
 use SMIL::Meta;
+use SMIL::Transition;
 
 @ISA = qw( SMIL::XMLContainer );
 
 my $layout = "layout";
 my $metas = "metas";
+my $transitions = 'transitions';
 my $meta = "meta";
 
 sub init {
@@ -60,24 +62,37 @@ sub setMeta {
     my $meta_tags_ref = $self->getContentObjectByName( $metas );
 
     if( !( $meta_tags_ref && @$meta_tags_ref ) ) {
-	$meta_tags_ref = [];
+								$meta_tags_ref = [];
     }
     
     # Extract the meta tags
     foreach $name ( keys %$hash_ref ) {
-	my $meta = new SMIL::Meta( $name, $$hash_ref{ $name } );
-	# Now, push it on the stack of meta tags
-	push @$meta_tags_ref, $meta;
+								my $meta = new SMIL::Meta( $name, $$hash_ref{ $name } );
+								# Now, push it on the stack of meta tags
+								push @$meta_tags_ref, $meta;
     }
-
-    $self->{$metas} = $meta_tags_ref;
+				
+#    $self->{$metas} = $meta_tags_ref;
     $self->setTagContents( $metas => $meta_tags_ref );
+}
+
+sub addTransition {
+				my $self = shift;
+				my $transitions_ref = $self->getContentObjectByName( $transitions );
+				if( !( $transitions_ref && @$transitions_ref ) ) {
+								$transitions_ref = [];
+				}
+
+				my $transition = new SMIL::Transition( @_ );
+				push @$transitions_ref, $transition;
+#				$self->{ $transitions } = $transitions_ref;
+				$self->setTagContents( $transitions => $transitions_ref );
 }
 
 sub addRegion {
     my $self = shift;
     $self->{$layout} = new SMIL::Layout( @_ )
-	unless $self->getContentObjectByName( $layout );
+								unless $self->getContentObjectByName( $layout );
     $self->getContentObjectByName( $layout )->addRegion( @_ );
 }
 

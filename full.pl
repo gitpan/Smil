@@ -9,9 +9,6 @@ my $obj = new Smil( 'height' => 234, 'width' => 300,
 		     "title" => "First Perl/SMIL",
 		     "copyright" => "1999 RealNetworks"} );
 
-# Set this to disable error checking
-#$obj->disableErrorChecking;
-
 my $region1 = "region1";
 my $region2 = "region2";
 my $region3 = "region3";
@@ -44,6 +41,5 @@ $obj->addMedia("region" => $region2,
 	       "src" => "rtsp://moothra.prognet.com/g2video.rm" );
 $obj->endSequence();
 
-$obj->getAsString();
+print $obj->getAsString();
 
-print "Installed successfully.\n";

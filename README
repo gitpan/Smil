@@ -47,9 +47,10 @@ name.
 
 WHERE ARE THE EXAMPLES?
 
-I have provided a few examples within the perldoc documentation.  It is 
-a top priority for me to add these to the web page for perlysmil, which 
-is here:
+I have provided a few examples within the perldoc documentation.  You can
+find plently of example scripts in the installation directory as well.
+It is a top priority for me to add these to the web page for perlysmil, 
+which is here:
 
 http://webiphany.com/perlysmil/
 

@@ -1,6 +1,6 @@
 package SMIL::TimelineBase;
 
-$VERSION = "0.72";
+$VERSION = "0.85";
 
 require Exporter;
 @ISA = qw( Exporter );

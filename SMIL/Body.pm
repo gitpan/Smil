@@ -1,6 +1,6 @@
 package SMIL::Body;
 
-$VERSION = "0.72";
+$VERSION = "0.85";
 
 use SMIL::XMLContainer;
 use SMIL::Par;
@@ -106,17 +106,16 @@ sub printTimelineStack {
 sub addMedia {
     my $self = shift;
     my %hash = @_;
-
+				
     $self->initTimeline( new SMIL::Par ) 
-	unless( $self->{$timelineStack} && @{$self->{$timelineStack}} );
+								unless( $self->{$timelineStack} && @{$self->{$timelineStack}} );
     croak "Need to call startParallel or startSequence before adding media\n" 
-	if !$check_errors && !@{$self->{$timelineStack}};
-     
+								if !$check_errors && !@{$self->{$timelineStack}};
+				
     my $timeline_head = ${$self->{$timelineStack}}[ -1 ];
     my $media = &getMediaObject( @_ );     
     $timeline_head->setTagContents( $self->{$counter}++ => $media );
 }
-
 
 sub addCode {
     my $self = shift;

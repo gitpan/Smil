@@ -1,6 +1,8 @@
 #!/usr/bin/perl -w
+
 use lib '.';
 use Smil;
+
 my $s = new Smil;
 $s->addMedia( src => "foo.gif", 'qt:bitrate' => 52000 );
 $s->setQtAutoplay;
